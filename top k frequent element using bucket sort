@@ -1,0 +1,29 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+
+ */
+var topKFrequent = function (nums, k) {
+const countMap = new Map()
+for(let num of nums){
+    countMap.set(num,(countMap.get(num) || 0)+1)
+}
+const n=nums.length
+const bucket = Array(n + 1).fill(0).map(() => []);
+for(let [num,freq] of countMap.entries()){
+    bucket[freq].push(num)
+}
+let result=[]
+for(let i=n;i>=1;i--){
+    if(bucket[i].length>0){
+        for(let num of bucket[i]){
+            result.push(num)
+        }
+        if(result.length==k){
+            return result
+        }
+    }
+}
+return result
+};
