@@ -1,0 +1,21 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function (nums) {
+    let countMap = new Map()
+    for (let num of nums) {
+        countMap.set(num, (countMap.get(num) || 0) + 1)
+    }
+    let count = 0
+    let result = 0
+    for (let [num, freq] of countMap.entries()) {
+
+        if (freq > count) {
+            count = freq
+            result = num
+        }
+
+    }
+    return result
+};
